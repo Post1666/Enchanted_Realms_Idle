@@ -125,7 +125,7 @@
             }
             isChopping = true;
             chopButton.classList.add('active');
-            chopInterval = setInterval(updateWood, 5000);
+            chopInterval = setInterval(updateWood, 1000);
         }
 
         function stopChopping() {
@@ -140,7 +140,7 @@
             }
             isGathering = true;
             gatherButton.classList.add('active');
-            gatherInterval = setInterval(updateGather, 5000);
+            gatherInterval = setInterval(updateGather, 10000);
         }
 
         function stopGathering() {
