@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enchanted Realms Idle</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .game-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        #wood-display {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #8B4513; /* Brown color for wood */
+        }
+        #nut-display {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #A0522D; /* Sienna color for nuts */
+        }
+        #berry-display {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #8B0000; /* Dark Red for berries */
+        }
+        .action-button {
+            background-color: #556B2F; /* Dark Olive Green */
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+        .action-button:hover {
+            background-color: #8FBC8F; /* Dark Sea Green */
+        }
+        .action-button.active {
+            background-color: #8FBC8F; /* Change color when active */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Enchanted Realms Idle</h1>
+        <div id="wood-display">Wood: 0</div>
+        <div id="nut-display">Nuts: 0</div>
+        <div id="berry-display">Berries: 0</div>
+        <button class="action-button" id="chop-button">Beaver</button>
+        <button class="action-button" id="gather-button">Chipmunk</button>
+    </div>
+
+    <script>
+        let woodCount = 0;
+        let nutCount = 0;
+        let berryCount = 0;
+        const woodDisplay = document.getElementById('wood-display');
+        const nutDisplay = document.getElementById('nut-display');
+        const berryDisplay = document.getElementById('berry-display');
+        const chopButton = document.getElementById('chop-button');
+        const gatherButton = document.getElementById('gather-button');
+
+        let isChopping = false;
+        let chopInterval;
+
+        let isGathering = false;
+        let gatherInterval;
+
+        function updateWood() {
+            woodCount += 1;
+            woodDisplay.textContent = `Wood: ${woodCount}`;
+        }
+
+        function updateGather() {
+            const random = Math.random();
+            if (random < 0.5) { // 50% chance for nuts
+                nutCount += 1;
+                nutDisplay.textContent = `Nuts: ${nutCount}`;
+            } else { // 50% chance for berries
+                berryCount += 1;
+                berryDisplay.textContent = `Berries: ${berryCount}`;
+            }
+        }
+
+        function startChopping() {
+            // Stop gathering if it's active
+            if (isGathering) {
+                stopGathering();
+            }
+            isChopping = true;
+            chopButton.classList.add('active');
+            chopInterval = setInterval(updateWood, 1000); // Chop every 1 second
+        }
+
+        function stopChopping() {
+            isChopping = false;
+            chopButton.classList.remove('active');
+            clearInterval(chopInterval);
+        }
+
+        function startGathering() {
+            // Stop chopping if it's active
+            if (isChopping) {
+                stopChopping();
+            }
+            isGathering = true;
+            gatherButton.classList.add('active');
+            gatherInterval = setInterval(updateGather, 1500); // Gather every 1.5 seconds
+        }
+
+        function stopGathering() {
+            isGathering = false;
+            gatherButton.classList.remove('active');
+            clearInterval(gatherInterval);
+        }
+
+        chopButton.addEventListener('click', () => {
+            if (isChopping) {
+                stopChopping();
+            } else {
+                startChopping();
+            }
+        });
+
+        gatherButton.addEventListener('click', () => {
+            if (isGathering) {
+                stopGathering();
+            } else {
+                startGathering();
+            }
+        });
+    </script>
+
+</body>
+</html>
