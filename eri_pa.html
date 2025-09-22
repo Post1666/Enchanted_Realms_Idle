@@ -21,28 +21,34 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             text-align: center;
         }
-        #wood-display {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #8B4513; /* Brown color for wood */
+        .section-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            width: 100%;
         }
-        #nut-display {
-            font-size: 2em;
-            margin-bottom: 10px;
-            color: #A0522D; /* Sienna color for nuts */
+        .section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+            width: 45%; /* Adjust width as needed */
         }
-        #berry-display {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #8B0000; /* Dark Red for berries */
+        #wood-display, #nut-display, #berry-display {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #333;
         }
+        #wood-display { color: #8B4513; } /* Brown for wood */
+        #nut-display { color: #A0522D; } /* Sienna for nuts */
+        #berry-display { color: #8B0000; } /* Dark Red for berries */
         .action-button {
             background-color: #556B2F; /* Dark Olive Green */
             color: white;
-            padding: 15px 30px;
+            padding: 12px 24px;
             border: none;
             border-radius: 5px;
-            font-size: 1.2em;
+            font-size: 1em;
             cursor: pointer;
             transition: background-color 0.3s ease;
             margin: 5px;
@@ -59,11 +65,21 @@
 
     <div class="game-container">
         <h1>Enchanted Realms Idle</h1>
-        <div id="wood-display">Wood: 0</div>
-        <div id="nut-display">Nuts: 0</div>
-        <div id="berry-display">Berries: 0</div>
-        <button class="action-button" id="chop-button">Beaver</button>
-        <button class="action-button" id="gather-button">Chipmunk</button>
+
+        <div class="section-container">
+            <div class="section" id="woodcutting-section">
+                <h2>Woodcutting</h2>
+                <div id="wood-display">Wood: 0</div>
+                <button class="action-button" id="chop-button">Beaver</button>
+            </div>
+
+            <div class="section" id="gathering-section">
+                <h2>Gathering</h2>
+                <div id="nut-display">Nuts: 0</div>
+                <div id="berry-display">Berries: 0</div>
+                <button class="action-button" id="gather-button">Chipmunk</button>
+            </div>
+        </div>
     </div>
 
     <script>
